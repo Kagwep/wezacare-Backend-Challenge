@@ -9,7 +9,7 @@ The base URL for the API is: `https://wezacare-backend-challenge.vercel.app/api/
 - Django
 - Django Rest Framework
 - Simple JWT
-
+- postgres
 ## Authentication
 
 To use the API, users must first register an account and then log in to obtain a JWT token. JWT tokens should be included in the Authorization header of all requests to the API.
