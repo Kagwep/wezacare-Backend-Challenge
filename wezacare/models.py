@@ -78,6 +78,7 @@ class CustomUser(AbstractBaseUser):
     def has_module_perms(self, app_label):
         return True
     
+    # encrypt password
     def save(self, *args, **kwargs):
         # Call set_password() if the user object has a password field and it has been changed
         if self.password and not self.password.startswith('pbkdf2_sha256'):
@@ -86,7 +87,7 @@ class CustomUser(AbstractBaseUser):
     
     
     
-    
+# Question model   
 class Question(models.Model):
     user_question = models.TextField()
     user = models.ForeignKey(CustomUser,on_delete=models.CASCADE)
@@ -99,7 +100,7 @@ class Question(models.Model):
     def get_question_details(self):
         return "Question: " + self.user_question +" asked by " + self.user.username
     
-    
+#Answer mode
 class Answer(models.Model):
     user_answer= models.TextField()
     question = models.ForeignKey(Question,on_delete=models.CASCADE)

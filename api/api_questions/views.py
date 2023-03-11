@@ -26,7 +26,7 @@ class QuestionList(APIView):
         #use our serializer class to serialize data from request
         user_question = request.data['user_question']
         
-        
+        # add question
         new_question = Question.objects.create(
             user_question=user_question,
             user=request.user

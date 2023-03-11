@@ -9,7 +9,7 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 from .permissions import UserPermission
 
 
-#get all users / post new user
+#get all answers by questio id / post new answer by question id
 class AnswerList(APIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = (UserPermission,)
@@ -17,7 +17,7 @@ class AnswerList(APIView):
  
 
     def get(self, request,questionId):
-        #get all users from model
+        #get all answers by questio id 
         if Question.objects.filter(id=questionId).exists():
              answers = Answer.objects.filter(question=questionId)
         else:
@@ -26,7 +26,8 @@ class AnswerList(APIView):
         serializer = AnswerSerializer(answers, many=True)
         #return serialized data
         return Response(serializer.data)
-
+    
+        #     post new answer by question id
     def post(self, request, questionId):
         user_answer = request.data['user_answer']
         if Question.objects.filter(id=questionId).exists():
@@ -41,6 +42,7 @@ class AnswerList(APIView):
         
                 # Check if the user has already answered the question    
 
+        #  add answer
         new_answer = Answer.objects.create(
             user_answer=user_answer,
             question=question,
@@ -59,16 +61,16 @@ class AnswerDetail(APIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = (UserPermission,)
 
-    # Retrieve, update or delete a user instance
+    # Retrieve, update or delete a answer instance
 
-    # #get user
+    # #get answer
     # def get_object(self, questionId,answerId):
     #     try:
     #         return Answer.objects.get(question=questionId,id=answerId)
     #     except Answer.DoesNotExist:
     #         raise Http404
         
-     #get user by id
+     #get answer by id
     def get(self, request, questionId,answerId):
         
         ques = Question.objects.filter(id=questionId).exists()
@@ -95,14 +97,14 @@ class AnswerDetail(APIView):
         #save the update
         answer.save()
 
-         #serialize the user
+         #serialize the answer
         serializer = AnswerSerializer(answer)
          # return the updated data
         return Response(serializer.data)
 
-    #get the user by id
+    #delete the answer by id
     def delete(self, request, questionId,answerId):
         answer = Answer.objects.get(question=questionId,id=answerId)
-        #delete the user
+        #delete the answer
         answer.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)

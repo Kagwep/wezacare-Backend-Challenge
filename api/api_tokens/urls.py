@@ -11,7 +11,9 @@ router = routers.DefaultRouter()
 
 urlpatterns = [
     path('', include(router.urls)),
+    # obtain  token 
     path('auth/login', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    # refresh token
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 
     

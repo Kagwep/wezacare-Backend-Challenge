@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import CustomUser,Question,Answer
 
-# Register your models here.
+# Register  models here.
 
 
 admin.site.register(CustomUser)
