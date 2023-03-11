@@ -70,7 +70,6 @@ This endpoint allows authenticated users to post a question to the platform.
 
 #### Request Parameters
 
-- `title`: The title of the question (string, required)
 - `body`: The body of the question (string, required)
 
 #### Response
