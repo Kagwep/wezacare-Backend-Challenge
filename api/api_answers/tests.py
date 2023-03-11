@@ -104,7 +104,7 @@ class AnswerPostTest(APITestCase):
 class AnswerTestCase(APITestCase):
     def setUp(self):
         
-        
+        # create user
         self.user = CustomUser.objects.create(
             email="juma07@gmail.com",
             username="peter",
@@ -113,7 +113,7 @@ class AnswerTestCase(APITestCase):
             last_name='juma',
             password='testusermodel'
         )
-        
+        # create user
         self.user_1 = CustomUser.objects.create(
             email="juma7@gmail.com",
             username="pet",
@@ -123,30 +123,30 @@ class AnswerTestCase(APITestCase):
             password='testusermodel'
         )
      
-        
+        # create question
         self.question = Question.objects.create(
             user_question = "How many days are there in a week.",
             user= self.user
         )
         
-        
+        # create answer
         self.answer = Answer.objects.create(
             user_answer = "There are seven days in a week",
             question = self.question,
             user = self.user
         )
-        
+        # create login object
         self.login = {
             'username':'peter',
             'password':'testusermodel'
             
         }
-        
+        # create login object
         self.login_1 = {
             'username':'pet',
             'password':'testusermodel'
         }
-        
+        # create login object
         self.update_answer = {
             "user_answer":"5",
              "question":1,
@@ -155,7 +155,7 @@ class AnswerTestCase(APITestCase):
         
   
         
-        
+        # Uses the reverse function to get the URL for the endpoint 
         self.url = reverse('token_obtain_pair')
         
         self.response = self.client.post(self.url,self.login,format='json')
